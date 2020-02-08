@@ -28,14 +28,15 @@ app.post("/", (req, res) => {
 
     console.log(fieldOperations);
 
-    extractData(fieldOperations);
+    let stages = extractData(fieldOperations);
 
-    res.redirect("/");
+    res.send(stages);
 });
 
 function extractData(fieldOperations) {
-    // let fieldName = fieldOperations.GridData.Field._text;
     let stages = [];
+
+    // let fieldName = fieldOperations.GridData.Field._text;
 
     fieldOperations.AnalysisData.Row.forEach(row => {
         let step;
@@ -72,6 +73,8 @@ function extractData(fieldOperations) {
 
     console.log("********");
     console.log(stages);
+
+    return stages;
 }
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));

@@ -84,11 +84,95 @@
             contentType: false,
             success: function(returned) {
                 console.log("Success\n");
+                populateTables(returned);
             },
             error: function(err) {
                 console.log("error: " + err);
             }
         });
+    }
+
+    function populateTables(stages) {
+        let plantingStages = [];
+        let fertilizingStages = [];
+        let pesticidesStages = [];
+        let harvestingStages = [];
+
+        stages.forEach(stage => {
+            if (stage.step == "PLANTING") {
+                plantingStages.push(stage);
+            } else if (stage.step == "FERTILIZING") {
+                fertilizingStages.push(stage);
+            } else if (stage.step == "PESTICIDES") {
+                pesticidesStages.push(stage);
+            } else if (stage.step == "HARVESTING") {
+                harvestingStages.push(stage);
+            }
+        });
+
+        /******************PLANTING TABLE UPDATE***********************/
+
+        let plantingContent =
+            "<tr><th>Field</th><th>Step</th><th>Description</th><th>Date</th></tr>";
+
+        for (var i = 0; i < plantingStages.length; i++) {
+            plantingContent += "<tr>";
+            plantingContent += "<td>" + plantingStages[i].field + "</td>";
+            plantingContent += "<td>" + plantingStages[i].step + "</td>";
+            plantingContent += "<td>" + plantingStages[i].description + "</td>";
+            plantingContent += "<td>" + plantingStages[i].date + "</td>";
+            plantingContent += "</tr>";
+        }
+
+        $("#planting-table").html(plantingContent);
+
+        /******************FERTILIZING TABLE UPDATE***********************/
+
+        let fertilizingContent =
+            "<tr><th>Field</th><th>Step</th><th>Description</th><th>Date</th></tr>";
+
+        for (var i = 0; i < fertilizingStages.length; i++) {
+            fertilizingContent += "<tr>";
+            fertilizingContent += "<td>" + fertilizingStages[i].field + "</td>";
+            fertilizingContent += "<td>" + fertilizingStages[i].step + "</td>";
+            fertilizingContent += "<td>" + fertilizingStages[i].description + "</td>";
+            fertilizingContent += "<td>" + fertilizingStages[i].date + "</td>";
+            fertilizingContent += "</tr>";
+        }
+
+        $("#fertilizing-table").html(fertilizingContent);
+
+        /******************PESTICIDES TABLE UPDATE***********************/
+
+        let pesticidesContent =
+            "<tr><th>Field</th><th>Step</th><th>Description</th><th>Date</th></tr>";
+
+        for (var i = 0; i < pesticidesStages.length; i++) {
+            pesticidesContent += "<tr>";
+            pesticidesContent += "<td>" + pesticidesStages[i].field + "</td>";
+            pesticidesContent += "<td>" + pesticidesStages[i].step + "</td>";
+            pesticidesContent += "<td>" + pesticidesStages[i].description + "</td>";
+            pesticidesContent += "<td>" + pesticidesStages[i].date + "</td>";
+            pesticidesContent += "</tr>";
+        }
+
+        $("#pesticides-table").html(pesticidesContent);
+
+        /******************HARVESTING TABLE UPDATE***********************/
+
+        let harvestingContent =
+            "<tr><th>Field</th><th>Step</th><th>Description</th><th>Date</th></tr>";
+
+        for (var i = 0; i < harvestingStages.length; i++) {
+            harvestingContent += "<tr>";
+            harvestingContent += "<td>" + harvestingStages[i].field + "</td>";
+            harvestingContent += "<td>" + harvestingStages[i].step + "</td>";
+            harvestingContent += "<td>" + harvestingStages[i].description + "</td>";
+            harvestingContent += "<td>" + harvestingStages[i].date + "</td>";
+            harvestingContent += "</tr>";
+        }
+
+        $("#harvesting-table").html(harvestingContent);
     }
 
     function xmlToString(xmlData) {
